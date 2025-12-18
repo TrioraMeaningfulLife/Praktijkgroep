@@ -51,12 +51,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Print Optimalisatie: Zorg dat alles onder elkaar komt te staan */
         @media print {
             .no-print { display: none !important; }
-            .print-only { display: block !important; }
-            body { background: white; padding: 0; }
-            .card-shadow { box-shadow: none; border: 1px solid #eee; }
-            .content-section { display: block !important; page-break-inside: avoid; margin-bottom: 2rem; }
+            .content-section { 
+                display: block !important; 
+                opacity: 1 !important; 
+                transform: none !important;
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+            body { background-color: white !important; padding: 0 !important; }
+            .max-w-4xl { max-width: 100% !important; }
+            .card-shadow { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            h2.print-header { display: block !important; margin-top: 20px; }
         }
     </style>
 </head>
@@ -70,8 +78,9 @@
             <h1 class="text-3xl md:text-5xl font-extrabold text-[#003255] mb-2">Restaurant en buitendienst</h1>
             <p class="text-lg text-slate-500 font-medium italic mb-6">Praktijkgroep 2 - Dagelijkse werkzaamheden</p>
             
-            <button onclick="window.print()" class="no-print bg-[#E66E19] hover:bg-[#c55d14] text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg flex items-center mx-auto gap-2">
-                <i class="fas fa-file-pdf"></i> Download overzicht (.pdf)
+            <!-- Download Knop -->
+            <button onclick="window.print()" class="no-print bg-[#E66E19] hover:bg-[#c55d14] text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg flex items-center mx-auto gap-3">
+                <i class="fas fa-file-pdf text-xl"></i> Download volledig overzicht (.pdf)
             </button>
 
             <div class="mt-8 flex justify-center gap-3 flex-wrap no-print">
@@ -81,145 +90,175 @@
             </div>
         </header>
 
-        <!-- Navigation Tabs (Hidden on Print) -->
-        <div class="no-print flex flex-wrap justify-center gap-4 md:gap-8 mb-10 border-b border-slate-200" id="tab-container">
+        <!-- Navigation Tabs (Alleen zichtbaar op scherm) -->
+        <nav class="no-print flex flex-wrap justify-center gap-4 md:gap-8 mb-10 border-b border-slate-200">
             <button onclick="showSection('ontbijt')" class="section-tab active px-2 py-4 text-sm uppercase tracking-widest font-bold focus:outline-none">Ontbijt</button>
             <button onclick="showSection('lunch')" class="section-tab px-2 py-4 text-sm uppercase tracking-widest font-bold focus:outline-none">Lunch</button>
             <button onclick="showSection('diner')" class="section-tab px-2 py-4 text-sm uppercase tracking-widest font-bold focus:outline-none">Diner</button>
             <button onclick="showSection('buiten')" class="section-tab px-2 py-4 text-sm uppercase tracking-widest font-bold focus:outline-none">Buitendienst</button>
             <button onclick="showSection('maandag')" class="section-tab px-2 py-4 text-sm uppercase tracking-widest font-bold focus:outline-none">Maandag</button>
-        </div>
+        </nav>
 
-        <!-- Content Area -->
-        <div id="content-area">
+        <!-- Overzicht Content -->
+        <div id="main-content">
             
             <!-- Ontbijt -->
-            <div id="ontbijt" class="content-section animate-fade-in mb-8">
-                <h2 class="hidden print:block text-2xl font-bold mb-4 text-[#003255] border-b-2 border-[#E66E19] pb-2">Ontbijt</h2>
-                <div class="grid md:grid-cols-2 gap-8">
+            <section id="ontbijt" class="content-section animate-fade-in">
+                <h2 class="hidden print:block text-2xl font-bold text-[#003255] mb-4 border-b-2 border-[#E66E19] pb-1 uppercase tracking-wider">1. Ontbijt</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#003255]">
-                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase tracking-wider">Vóór het ontbijt <span class="text-[#E66E19] ml-2">07:45</span></h3>
+                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-sm tracking-widest">Vóór het ontbijt <span class="text-[#E66E19] ml-2">07:45</span></h3>
                         <ul class="space-y-3">
                             <li class="flex items-start font-medium"><i class="fas fa-check-circle text-[#82BC00] mt-1 mr-3"></i> Zuivel en vleeswaren op de tafels zetten.</li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-slate-200">
-                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase tracking-wider">Na het ontbijt</h3>
+                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-sm tracking-widest">Na het ontbijt</h3>
                         <ul class="space-y-3 text-slate-600">
                             <li class="flex items-start"><i class="fas fa-sink mt-1 mr-3 text-[#003255]"></i> Restjes weggooien en afwassen in de spoelkeuken.</li>
                             <li class="flex items-start"><i class="fas fa-snowflake mt-1 mr-3 text-[#003255]"></i> Gekoelde producten direct terugzetten.</li>
                             <li class="flex items-start"><i class="fas fa-broom mt-1 mr-3 text-[#003255]"></i> Tafels schoonmaken en opdekken voor lunch.</li>
+                            <li class="flex items-start"><i class="fas fa-utensils mt-1 mr-3 text-[#003255]"></i> Servetten en bestek klaarleggen.</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Lunch -->
-            <div id="lunch" class="content-section hidden print:block animate-fade-in mb-8">
-                <h2 class="hidden print:block text-2xl font-bold mb-4 text-[#003255] border-b-2 border-[#E66E19] pb-2">Lunch</h2>
-                <div class="grid md:grid-cols-2 gap-8">
+            <section id="lunch" class="content-section hidden print:block animate-fade-in">
+                <h2 class="hidden print:block text-2xl font-bold text-[#003255] mb-4 border-b-2 border-[#E66E19] pb-1 uppercase tracking-wider">2. Lunch</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#003255]">
-                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase tracking-wider">Vóór de lunch <span class="text-[#E66E19] ml-2">12:00</span></h3>
+                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-sm tracking-widest">Vóór de lunch <span class="text-[#E66E19] ml-2">12:00</span></h3>
                         <ul class="space-y-3">
                             <li class="flex items-start font-medium"><i class="fas fa-check-circle text-[#82BC00] mt-1 mr-3"></i> Zuivel en vleeswaren op de tafels zetten.</li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-slate-200">
-                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase tracking-wider">Na de lunch</h3>
+                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-sm tracking-widest">Na de lunch</h3>
                         <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start"><i class="fas fa-snowflake mt-1 mr-3 text-[#003255]"></i> Gekoelde producten direct terugzetten.</li>
                             <li class="flex items-start"><i class="fas fa-tint mt-1 mr-3 text-[#003255]"></i> Waterkannen vullen en koud zetten voor diner.</li>
                             <li class="flex items-start"><i class="fas fa-broom mt-1 mr-3 text-[#003255]"></i> Tafels schoonmaken en opdekken voor diner.</li>
+                            <li class="flex items-start"><i class="fas fa-utensils mt-1 mr-3 text-[#003255]"></i> Servetten en bestek klaarleggen.</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Diner -->
-            <div id="diner" class="content-section hidden print:block animate-fade-in mb-8">
-                <h2 class="hidden print:block text-2xl font-bold mb-4 text-[#003255] border-b-2 border-[#E66E19] pb-2">Diner</h2>
-                <div class="grid md:grid-cols-2 gap-8">
+            <section id="diner" class="content-section hidden print:block animate-fade-in">
+                <h2 class="hidden print:block text-2xl font-bold text-[#003255] mb-4 border-b-2 border-[#E66E19] pb-1 uppercase tracking-wider">3. Diner</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#003255]">
-                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase tracking-wider">Vóór het diner <span class="text-[#E66E19] ml-2">17:20</span></h3>
+                        <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-sm tracking-widest">Vóór het diner <span class="text-[#E66E19] ml-2">17:20</span></h3>
                         <ul class="space-y-3">
-                            <li class="flex items-start font-medium"><i class="fas fa-utensils text-[#82BC00] mt-1 mr-3"></i> Waterkannen, vla, peper en zout op tafel.</li>
+                            <li class="flex items-start font-medium"><i class="fas fa-wine-glass text-[#82BC00] mt-1 mr-3"></i> Waterkannen, vla, peper en zout op tafel.</li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#E66E19]">
-                        <h3 class="category-header text-lg font-bold text-[#E66E19] mb-4 pl-4 uppercase tracking-wider border-[#E66E19]">Sluiting</h3>
+                        <h3 class="category-header text-lg font-bold text-[#E66E19] mb-4 pl-4 uppercase text-sm tracking-widest border-[#E66E19]">Einde dag & Sluiting</h3>
                         <ul class="space-y-3 text-slate-600">
-                            <li class="flex items-start font-bold"><i class="fas fa-clipboard-check text-[#E66E19] mt-1 mr-3"></i> HACCP-controle uitvoeren.</li>
-                            <li class="flex items-start"><i class="fas fa-broom mt-1 mr-3"></i> Restaurantvloer stofzuigen en dweilen.</li>
-                            <li class="flex items-start"><i class="fas fa-table mt-1 mr-3"></i> Tafels opdekken voor ontbijt.</li>
+                            <li class="flex items-start font-bold text-[#003255]"><i class="fas fa-clipboard-check text-[#E66E19] mt-1 mr-3"></i> HACCP-controle uitvoeren (zuivel/vlees).</li>
+                            <li class="flex items-start"><i class="fas fa-broom mt-1 mr-3"></i> Vloer stofzuigen en dweilen.</li>
+                            <li class="flex items-start"><i class="fas fa-table mt-1 mr-3"></i> Tafels opdekken voor ontbijt (incl. zoet beleg).</li>
+                            <li class="flex items-start"><i class="fas fa-trash-alt mt-1 mr-3"></i> Vuilnisbakken legen en nieuwe zakken plaatsen.</li>
+                            <li class="flex items-start"><i class="fas fa-spray-can mt-1 mr-3"></i> Koelkast buitenzijde en handvaten reinigen.</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Buitendienst -->
-            <div id="buiten" class="content-section hidden print:block animate-fade-in mb-8">
-                <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#82BC00]">
-                    <h2 class="text-xl font-bold text-[#82BC00] mb-6 pl-4 uppercase tracking-widest border-l-4 border-[#82BC00]">Buitendienst</h2>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <ul class="space-y-3 text-slate-600">
-                            <li class="flex items-start"><i class="fas fa-broom text-[#82BC00] mt-1 mr-3"></i> Terras vegen en meubilair ordenen.</li>
-                            <li class="flex items-start"><i class="fas fa-trash text-[#82BC00] mt-1 mr-3"></i> Zwerfvuil rondom gebouw & parkeerplaatsen.</li>
-                        </ul>
-                        <ul class="space-y-3 text-slate-600">
-                            <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#E66E19] mt-1 mr-3"></i> Ma-avond: Grijze containers voorzetten.</li>
-                            <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#003255] mt-1 mr-3"></i> Di-avond: Blauwe containers voorzetten.</li>
-                        </ul>
+            <section id="buiten" class="content-section hidden print:block animate-fade-in">
+                <h2 class="hidden print:block text-2xl font-bold text-[#003255] mb-4 border-b-2 border-[#82BC00] pb-1 uppercase tracking-wider">4. Buitendienst</h2>
+                <div class="bg-white p-8 rounded-2xl card-shadow border-t-4 border-[#82BC00] mb-8">
+                    <div class="grid md:grid-cols-2 gap-10">
+                        <div>
+                            <h3 class="font-bold text-[#003255] mb-4 flex items-center uppercase text-xs tracking-widest">
+                                <span class="w-6 h-6 rounded-full bg-[#82BC00] text-white flex items-center justify-center mr-2 text-[10px]">A</span> Terrein
+                            </h3>
+                            <ul class="space-y-3 text-slate-600">
+                                <li class="flex items-start"><i class="fas fa-broom text-[#82BC00] mt-1 mr-3"></i> Terras vegen en meubilair ordenen.</li>
+                                <li class="flex items-start"><i class="fas fa-trash text-[#82BC00] mt-1 mr-3"></i> Zwerfvuil rondom het gebouw & parkeerplaatsen.</li>
+                                <li class="flex items-start"><i class="fas fa-snowflake text-[#003255] mt-1 mr-3 opacity-50"></i> Bij winter: Entree vrijmaken van bladeren/sneeuw.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#003255] mb-4 flex items-center uppercase text-xs tracking-widest">
+                                <span class="w-6 h-6 rounded-full bg-[#003255] text-white flex items-center justify-center mr-2 text-[10px]">B</span> Containers
+                            </h3>
+                            <ul class="space-y-3 text-slate-600">
+                                <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#E66E19] mt-1 mr-3"></i> Maandagavond: Grijze containers voorzetten.</li>
+                                <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#003255] mt-1 mr-3"></i> Dinsdagavond: Blauwe containers voorzetten.</li>
+                                <li class="flex items-start"><i class="fas fa-undo text-slate-400 mt-1 mr-3"></i> Containers terugzetten na lediging.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Maandag -->
-            <div id="maandag" class="content-section hidden print:block animate-fade-in">
-                <div class="bg-[#F0F4F7] p-8 rounded-2xl border border-slate-200">
-                    <h3 class="text-xl font-bold text-[#003255] mb-6 flex items-center">
-                        <i class="fas fa-calendar-alt mr-3"></i> Extra Focus Maandag
-                    </h3>
-                    <div class="grid md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-xl shadow-sm text-center">
-                            <i class="fas fa-tray text-[#003255] mb-2"></i>
-                            <p class="text-xs font-bold uppercase">Dienbladen</p>
-                            <p class="text-xs text-slate-500">Grondig afwassen.</p>
+            <section id="maandag" class="content-section hidden print:block animate-fade-in">
+                <h2 class="hidden print:block text-2xl font-bold text-[#003255] mb-4 border-b-2 border-slate-300 pb-1 uppercase tracking-wider">5. Maandag (Schoonmaak)</h2>
+                <div class="bg-[#F0F4F7] p-8 rounded-2xl border border-slate-200 mb-8">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm text-center border-b-4 border-[#003255]">
+                            <i class="fas fa-tray text-[#003255] text-2xl mb-3"></i>
+                            <p class="font-bold text-[#003255] text-xs uppercase mb-1">Dienbladen</p>
+                            <p class="text-xs text-slate-500 italic">Alle dienbladen met zoet beleg grondig afwassen.</p>
                         </div>
-                        <div class="bg-white p-4 rounded-xl shadow-sm text-center">
-                            <i class="fas fa-box text-[#003255] mb-2"></i>
-                            <p class="text-xs font-bold uppercase">Belegbakken</p>
-                            <p class="text-xs text-slate-500">Reinigen.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-sm text-center border-b-4 border-[#003255]">
+                            <i class="fas fa-box-open text-[#003255] text-2xl mb-3"></i>
+                            <p class="font-bold text-[#003255] text-xs uppercase mb-1">Belegbakken</p>
+                            <p class="text-xs text-slate-500 italic">Alle plastic bakken volledig reinigen.</p>
                         </div>
-                        <div class="bg-white p-4 rounded-xl shadow-sm text-center">
-                            <i class="fas fa-snowflake text-[#E66E19] mb-2"></i>
-                            <p class="text-xs font-bold uppercase">Koelkast</p>
-                            <p class="text-xs text-slate-500">Soppen.</p>
+                        <div class="bg-white p-6 rounded-xl shadow-sm text-center border-b-4 border-[#E66E19]">
+                            <i class="fas fa-soap text-[#E66E19] text-2xl mb-3"></i>
+                            <p class="font-bold text-[#E66E19] text-xs uppercase mb-1">Koelkast</p>
+                            <p class="text-xs text-slate-500 italic">Grote koelkast binnenkant volledig soppen.</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
         </div>
 
-        <footer class="mt-12 text-center no-print">
-            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">
-                Triora &copy; 2025 | Meaningful Life
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-slate-100 text-center">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-8 no-print">
+                 <div class="flex items-center gap-2 text-sm font-semibold text-[#003255]">
+                    <i class="fas fa-handshake text-[#E66E19]"></i> Samenwerking is essentieel
+                 </div>
+            </div>
+            <p class="text-slate-400 text-[10px] uppercase tracking-[0.2em] font-bold">
+                Triora &copy; 2025 | Meaningful Life | Parnassia Groep
             </p>
         </footer>
     </div>
 
     <script>
         function showSection(id) {
+            // Verberg alle secties op scherm
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.add('hidden');
             });
+            
+            // Toon de gekozen sectie
             const target = document.getElementById(id);
             target.classList.remove('hidden');
             
+            // Update tab styling
             document.querySelectorAll('.section-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
         }
+
+        // Voor de print-functie: zorg dat bij het printen alle headers zichtbaar zijn
+        window.onbeforeprint = function() {
+            // Geen extra JS nodig door CSS @media print regels
+        };
     </script>
 </body>
 </html>
