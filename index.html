@@ -42,71 +42,36 @@
             box-shadow: 0 4px 20px rgba(0, 50, 85, 0.08);
         }
 
-        /* PRINT STYLES - GEOPTIMALISEERD VOOR 1 A4 */
+        /* PRINT STYLES */
         @media print {
-            @page {
-                size: A4;
-                margin: 0.5cm;
-            }
-
+            /* Verberg navigatie en knoppen */
             .no-print { display: none !important; }
             
-            body { 
-                background: white !important; 
-                padding: 0 !important;
-                font-size: 11px; /* Iets kleinere tekst voor A4 passing */
-            }
-
-            .max-w-4xl { max-width: 100% !important; width: 100% !important; }
-
-            header { 
-                margin-bottom: 15px !important; 
-                padding-bottom: 10px !important; 
-            }
-
-            h1 { font-size: 1.8rem !important; margin-bottom: 0 !important; }
-            p.text-lg { font-size: 0.9rem !important; margin-bottom: 5px !important; }
-
+            /* Forceer alle secties naar zichtbaar */
             .content-section { 
                 display: block !important; 
                 opacity: 1 !important; 
                 visibility: visible !important;
-                margin-bottom: 15px !important; /* Minder ruimte tussen blokken */
+                position: static !important;
+                margin-bottom: 40px !important;
                 page-break-inside: avoid;
             }
 
+            /* Toon print-headers */
             .print-only-title { 
                 display: block !important; 
-                font-size: 1.1rem !important;
+                font-size: 1.5rem;
                 font-weight: bold;
-                border-bottom: 1.5px solid var(--triora-orange);
-                margin-bottom: 8px !important;
-                padding-bottom: 2px;
+                border-bottom: 2px solid var(--triora-orange);
+                margin-bottom: 1rem;
+                padding-bottom: 0.25rem;
                 text-transform: uppercase;
                 color: var(--triora-blue);
             }
 
-            .grid { 
-                display: grid !important; 
-                grid-template-columns: repeat(2, 1fr) !important; 
-                gap: 10px !important; 
-            }
-
-            /* Specifieke fix voor Maandag sectie in print */
-            #maandag .grid {
-                grid-template-columns: repeat(3, 1fr) !important;
-            }
-
-            .card-shadow { 
-                box-shadow: none !important; 
-                border: 1px solid #eee !important; 
-                padding: 10px !important;
-            }
-
-            .category-header { font-size: 0.85rem !important; margin-bottom: 5px !important; }
-            ul li { margin-bottom: 2px !important; }
-            
-            footer { margin-top: 10px !important; padding-top: 5px !important; }
+            body { background: white !important; padding: 0 !important; }
+            .max-w-4xl { max-width: 100% !important; width: 100% !important; }
+            .card-shadow { box-shadow: none !important; border: 1px solid #ddd !important; }
         }
 
         .print-only-title { display: none; }
@@ -116,18 +81,18 @@
     <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <header class="text-center mb-10 border-b border-slate-100 pb-8">
-            <div class="mb-4 inline-block px-4 py-1 rounded border border-[#003255] text-[#003255] font-bold tracking-widest text-xs uppercase no-print">
+            <div class="mb-4 inline-block px-4 py-1 rounded border border-[#003255] text-[#003255] font-bold tracking-widest text-xs uppercase">
                 Triora - Parnassia Groep
             </div>
             <h1 class="text-3xl md:text-5xl font-extrabold text-[#003255] mb-2">Restaurant en buitendienst</h1>
             <p class="text-lg text-slate-500 font-medium italic mb-6">Praktijkgroep 2 - Dagelijkse werkzaamheden</p>
             
-            <!-- Download Knop -->
-            <button onclick="downloadFullOverview()" class="no-print bg-[#E66E19] hover:bg-[#c55d14] text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg flex items-center mx-auto gap-3 text-lg mb-4">
+            <!-- Verbeterde Download Knop -->
+            <button onclick="downloadFullOverview()" class="no-print bg-[#E66E19] hover:bg-[#c55d14] text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg flex items-center mx-auto gap-3 text-lg">
                 <i class="fas fa-file-pdf"></i> Download Volledig Overzicht (.pdf)
             </button>
 
-            <div class="mt-4 flex justify-center gap-3 flex-wrap no-print">
+            <div class="mt-8 flex justify-center gap-3 flex-wrap no-print">
                 <span class="bg-[#003255] text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Restaurant</span>
                 <span class="bg-[#82BC00] text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Buitendienst</span>
                 <span class="bg-[#E66E19] text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">HACCP</span>
@@ -147,20 +112,20 @@
         <div id="content-container">
             
             <!-- 1. ONTBIJT -->
-            <div id="ontbijt" class="content-section mb-10">
+            <div id="ontbijt" class="content-section mb-12">
                 <h2 class="print-only-title">1. Ontbijt</h2>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#003255]">
                         <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-xs tracking-widest">Vóór het ontbijt (07:45)</h3>
-                        <ul class="space-y-2">
+                        <ul class="space-y-3">
                             <li class="flex items-start"><i class="fas fa-check-circle text-[#82BC00] mt-1 mr-3"></i> Zuivel en vleeswaren op de tafels zetten.</li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-slate-200">
                         <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-xs tracking-widest">Na het ontbijt</h3>
-                        <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start"><i class="fas fa-sink mt-1 mr-3 text-[#003255]"></i> Restjes weggooien en afwassen (spoelkeuken).</li>
-                            <li class="flex items-start"><i class="fas fa-snowflake mt-1 mr-3 text-[#003255]"></i> Producten direct terugzetten in koeling.</li>
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start"><i class="fas fa-sink mt-1 mr-3 text-[#003255]"></i> Restjes weggooien en afwassen in de spoelkeuken.</li>
+                            <li class="flex items-start"><i class="fas fa-snowflake mt-1 mr-3 text-[#003255]"></i> Producten direct terugzetten in de koeling.</li>
                             <li class="flex items-start"><i class="fas fa-broom mt-1 mr-3 text-[#003255]"></i> Tafels schoonmaken en opdekken voor lunch.</li>
                         </ul>
                     </div>
@@ -168,18 +133,18 @@
             </div>
 
             <!-- 2. LUNCH -->
-            <div id="lunch" class="content-section mb-10 hidden">
+            <div id="lunch" class="content-section mb-12 hidden">
                 <h2 class="print-only-title">2. Lunch</h2>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#003255]">
                         <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-xs tracking-widest">Vóór de lunch (12:00)</h3>
-                        <ul class="space-y-2">
+                        <ul class="space-y-3">
                             <li class="flex items-start"><i class="fas fa-check-circle text-[#82BC00] mt-1 mr-3"></i> Zuivel en vleeswaren op de tafels zetten.</li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-slate-200">
                         <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-xs tracking-widest">Na de lunch</h3>
-                        <ul class="space-y-2 text-slate-600">
+                        <ul class="space-y-3 text-slate-600">
                             <li class="flex items-start"><i class="fas fa-tint mt-1 mr-3 text-[#003255]"></i> Waterkannen vullen en koud zetten voor diner.</li>
                             <li class="flex items-start"><i class="fas fa-utensils mt-1 mr-3 text-[#003255]"></i> Tafels schoonmaken en opdekken voor diner.</li>
                         </ul>
@@ -188,42 +153,43 @@
             </div>
 
             <!-- 3. DINER -->
-            <div id="diner" class="content-section mb-10 hidden">
+            <div id="diner" class="content-section mb-12 hidden">
                 <h2 class="print-only-title">3. Diner</h2>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#003255]">
                         <h3 class="category-header text-lg font-bold text-[#003255] mb-4 pl-4 uppercase text-xs tracking-widest">Vóór het diner (17:20)</h3>
-                        <ul class="space-y-2">
+                        <ul class="space-y-3">
                             <li class="flex items-start"><i class="fas fa-wine-glass text-[#82BC00] mt-1 mr-3"></i> Waterkannen, vla en peper/zout op tafel.</li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#E66E19]">
                         <h3 class="category-header text-lg font-bold text-[#E66E19] mb-4 pl-4 uppercase text-xs tracking-widest">Afsluiting & HACCP</h3>
-                        <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start font-bold"><i class="fas fa-clipboard-check text-[#E66E19] mt-1 mr-3"></i> HACCP-controle en vloer reinigen.</li>
-                            <li class="flex items-start"><i class="fas fa-table mt-1 mr-3"></i> Tafels opdekken voor ontbijt (incl. beleg).</li>
-                            <li class="flex items-start"><i class="fas fa-spray-can mt-1 mr-3"></i> Koelkast buitenzijde en handvaten reinigen.</li>
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start font-bold"><i class="fas fa-clipboard-check text-[#E66E19] mt-1 mr-3"></i> HACCP-controle zuivel en vleeswaren.</li>
+                            <li class="flex items-start"><i class="fas fa-broom mt-1 mr-3"></i> Vloer stofzuigen en dweilen.</li>
+                            <li class="flex items-start"><i class="fas fa-table mt-1 mr-3"></i> Tafels opdekken voor ontbijt.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- 4. BUITENDIENST -->
-            <div id="buiten" class="content-section mb-10 hidden">
+            <div id="buiten" class="content-section mb-12 hidden">
                 <h2 class="print-only-title">4. Buitendienst</h2>
-                <div class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-[#82BC00]">
+                <div class="bg-white p-8 rounded-2xl card-shadow border-t-4 border-[#82BC00]">
                     <div class="grid md:grid-cols-2 gap-8">
                         <div>
-                            <h4 class="font-bold text-[#003255] mb-2 uppercase text-[10px] tracking-widest border-b pb-1">Terrein</h4>
-                            <ul class="space-y-1 text-slate-600 text-xs">
-                                <li class="flex items-start"><i class="fas fa-broom text-[#82BC00] mt-1 mr-2"></i> Terras vegen en meubilair ordenen.</li>
-                                <li class="flex items-start"><i class="fas fa-trash text-[#82BC00] mt-1 mr-2"></i> Zwerfvuil rondom parkeerplaatsen.</li>
+                            <h4 class="font-bold text-[#003255] mb-4 uppercase text-xs tracking-widest border-b pb-2">Onderhoud Terrein</h4>
+                            <ul class="space-y-3 text-slate-600">
+                                <li class="flex items-start"><i class="fas fa-broom text-[#82BC00] mt-1 mr-3"></i> Terras vegen en meubilair ordenen.</li>
+                                <li class="flex items-start"><i class="fas fa-trash text-[#82BC00] mt-1 mr-3"></i> Zwerfvuil rondom parkeerplaatsen verwijderen.</li>
                             </ul>
                         </div>
                         <div>
-                            <h4 class="font-bold text-[#003255] mb-2 uppercase text-[10px] tracking-widest border-b pb-1">Containers</h4>
-                            <ul class="space-y-1 text-slate-600 text-xs">
-                                <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#E66E19] mt-1 mr-2"></i> Ma-avond: Grijs / Di-avond: Blauw.</li>
+                            <h4 class="font-bold text-[#003255] mb-4 uppercase text-xs tracking-widest border-b pb-2">Containers</h4>
+                            <ul class="space-y-3 text-slate-600">
+                                <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#E66E19] mt-1 mr-3"></i> Ma-avond: Grijs voorzetten.</li>
+                                <li class="flex items-start font-semibold"><i class="fas fa-truck text-[#003255] mt-1 mr-3"></i> Di-avond: Blauw voorzetten.</li>
                             </ul>
                         </div>
                     </div>
@@ -231,24 +197,24 @@
             </div>
 
             <!-- 5. MAANDAG -->
-            <div id="maandag" class="content-section mb-6 hidden">
+            <div id="maandag" class="content-section mb-12 hidden">
                 <h2 class="print-only-title">5. Maandag Schoonmaak</h2>
-                <div class="bg-[#F0F4F7] p-4 rounded-2xl border border-slate-200">
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="bg-white p-3 rounded-xl text-center shadow-sm">
-                            <i class="fas fa-tray text-[#003255] mb-1 text-lg"></i>
-                            <p class="font-bold text-[9px] uppercase">Dienbladen</p>
-                            <p class="text-[8px] text-slate-500">Grondig afwassen</p>
+                <div class="bg-[#F0F4F7] p-8 rounded-2xl border border-slate-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl text-center shadow-sm">
+                            <i class="fas fa-tray text-[#003255] mb-2 text-xl"></i>
+                            <p class="font-bold text-xs uppercase">Dienbladen</p>
+                            <p class="text-[10px] text-slate-500">Afwassen (zoet beleg)</p>
                         </div>
-                        <div class="bg-white p-3 rounded-xl text-center shadow-sm">
-                            <i class="fas fa-box text-[#003255] mb-1 text-lg"></i>
-                            <p class="font-bold text-[9px] uppercase">Belegbakken</p>
-                            <p class="text-[8px] text-slate-500">Plastic reinigen</p>
+                        <div class="bg-white p-4 rounded-xl text-center shadow-sm">
+                            <i class="fas fa-box text-[#003255] mb-2 text-xl"></i>
+                            <p class="font-bold text-xs uppercase">Belegbakken</p>
+                            <p class="text-[10px] text-slate-500">Volledig reinigen</p>
                         </div>
-                        <div class="bg-white p-3 rounded-xl text-center shadow-sm">
-                            <i class="fas fa-soap text-[#E66E19] mb-1 text-lg"></i>
-                            <p class="font-bold text-[9px] uppercase">Koelkast</p>
-                            <p class="text-[8px] text-slate-500">Binnenkant soppen</p>
+                        <div class="bg-white p-4 rounded-xl text-center shadow-sm">
+                            <i class="fas fa-soap text-[#E66E19] mb-2 text-xl"></i>
+                            <p class="font-bold text-xs uppercase">Koelkast</p>
+                            <p class="text-[10px] text-slate-500">Binnenkant soppen</p>
                         </div>
                     </div>
                 </div>
@@ -256,8 +222,8 @@
 
         </div>
 
-        <footer class="mt-4 text-center">
-            <p class="text-slate-400 text-[9px] uppercase tracking-widest font-bold">Triora &copy; 2025 | Meaningful Life | Parnassia Groep</p>
+        <footer class="mt-8 text-center no-print">
+            <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Triora &copy; 2025</p>
         </footer>
     </div>
 
@@ -275,16 +241,18 @@
         }
 
         function downloadFullOverview() {
+            // Sla de huidige actieve sectie op
             const activeTab = document.querySelector('.section-tab.active');
             const sections = document.querySelectorAll('.content-section');
             
-            // Toon tijdelijk alles
+            // Toon tijdelijk alles voor de printer
             sections.forEach(s => s.classList.remove('hidden'));
             
-            // Start print
+            // Start de browser print dialoog
             window.print();
             
-            // Herstel view
+            // Herstel de view na het printen (zet alles weer verborgen behalve de actieve)
+            // Gebruik een kleine timeout zodat de print-opdracht eerst verwerkt wordt
             setTimeout(() => {
                 const currentActiveId = activeTab ? activeTab.getAttribute('onclick').match(/'([^']+)'/)[1] : 'ontbijt';
                 sections.forEach(s => {
